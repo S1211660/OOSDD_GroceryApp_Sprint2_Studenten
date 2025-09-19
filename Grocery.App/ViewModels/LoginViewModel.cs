@@ -18,7 +18,7 @@ namespace Grocery.App.ViewModels
         private string password = "user3";
 
         [ObservableProperty]
-        private string loginMessage;
+        private string loginMessage = string.Empty;
 
         public LoginViewModel(IAuthService authService, GlobalViewModel global)
         { //_authService = App.Services.GetServices<IAuthService>().FirstOrDefault();
@@ -35,7 +35,10 @@ namespace Grocery.App.ViewModels
                 LoginMessage = $"Welkom {authenticatedClient.Name}!";
                 _global.Client = authenticatedClient;
                 GlobalViewModel.Current = _global;
-                Application.Current.MainPage = new AppShell();
+                if (Application.Current != null)
+                {
+                    Application.Current.MainPage = new AppShell();
+                }
             }
             else
             {
