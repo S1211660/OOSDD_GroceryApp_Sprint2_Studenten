@@ -15,6 +15,10 @@ namespace Grocery.Core.Services
         {
             return _groceryRepository.GetAll();
         }
+        public List<GroceryList> GetAllByClientId(int clientId)
+        {
+            return _groceryRepository.GetAllByClientId(clientId);
+        }
         public GroceryList Add(GroceryList item)
         {
             throw new NotImplementedException();

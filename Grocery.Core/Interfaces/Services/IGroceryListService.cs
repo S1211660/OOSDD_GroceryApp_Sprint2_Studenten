@@ -5,6 +5,7 @@ namespace Grocery.Core.Interfaces.Services
     public interface IGroceryListService
     {
         public List<GroceryList> GetAll();
+        public List<GroceryList> GetAllByClientId(int clientId);
         public GroceryList Add(GroceryList item);
 
         public GroceryList? Delete(GroceryList item);

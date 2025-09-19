@@ -14,7 +14,6 @@ namespace Grocery.App.ViewModels
         [ObservableProperty]
         GroceryList groceryList = new(0, "", DateOnly.MinValue, "", 0);
 
-
         public ChangeColorViewModel(IGroceryListService groceryListService)
         {
             _groceryListService = groceryListService;
@@ -22,7 +21,11 @@ namespace Grocery.App.ViewModels
 
         partial void OnGroceryListChanged(GroceryList value)
         {
-            GroceryList = _groceryListService.Update(value);
+            var updatedList = _groceryListService.Update(value);
+            if (updatedList != null)
+            {
+                GroceryList = updatedList;
+            }
         }
 
         [RelayCommand]

@@ -7,7 +7,24 @@
              Title="GroceryListsView">
     <Shell.TitleView>
         <Grid>
-            <Label Text="Boodschappenlijsten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+               Text="Boodschappenlijsten" 
+               FontSize="Large" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" />
+
+            <Label Grid.Column="1" 
+               Text="{Binding Source={x:Static vm:GlobalViewModel.Current}, Path=UserDisplayName}" 
+               FontSize="18" 
+               HorizontalOptions="End" 
+               VerticalOptions="Center" 
+               TextColor="Black"
+               Margin="0,0,10,0" />
         </Grid>
     </Shell.TitleView>
 

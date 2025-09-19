@@ -8,14 +8,27 @@ namespace Grocery.App.ViewModels
 {
     public partial class GroceryListViewModel : BaseViewModel
     {
-        public ObservableCollection<GroceryList> GroceryLists { get; set; }
+        public ObservableCollection<GroceryList> GroceryLists { get; set; } = new();
         private readonly IGroceryListService _groceryListService;
 
-        public GroceryListViewModel(IGroceryListService groceryListService) 
+        public GroceryListViewModel(IGroceryListService groceryListService)
         {
             Title = "Boodschappenlijst";
             _groceryListService = groceryListService;
-            GroceryLists = new(_groceryListService.GetAll());
+            LoadGroceryLists();
+        }
+
+        private void LoadGroceryLists()
+        {
+            var currentClient = GlobalViewModel.Current?.Client;
+            if (currentClient != null)
+            {
+                GroceryLists = new(_groceryListService.GetAllByClientId(currentClient.Id));
+            }
+            else
+            {
+                GroceryLists = new(_groceryListService.GetAll());
+            }
         }
 
         [RelayCommand]
@@ -24,10 +37,11 @@ namespace Grocery.App.ViewModels
             Dictionary<string, object> paramater = new() { { nameof(GroceryList), groceryList } };
             await Shell.Current.GoToAsync($"{nameof(Views.GroceryListItemsView)}?Titel={groceryList.Name}", true, paramater);
         }
+
         public override void OnAppearing()
         {
             base.OnAppearing();
-            GroceryLists = new(_groceryListService.GetAll());
+            LoadGroceryLists();
         }
 
         public override void OnDisappearing()
