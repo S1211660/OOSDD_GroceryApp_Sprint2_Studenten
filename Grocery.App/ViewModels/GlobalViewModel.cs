@@ -4,6 +4,8 @@ namespace Grocery.App.ViewModels
 {
     public partial class GlobalViewModel : BaseViewModel
     {
-        public Client Client { get; set; }
+        public static GlobalViewModel Current { get; set; } = new GlobalViewModel();
+        public Client? Client { get; set; } = null;
+        public string UserDisplayName => Client?.Name ?? "Niet ingelogd";
     }
 }

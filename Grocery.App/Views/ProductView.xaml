@@ -4,10 +4,27 @@
              xmlns:vm="clr-namespace:Grocery.App.ViewModels"
              x:Class="Grocery.App.Views.ProductView"
              Title="ProductView">
-    
+
     <Shell.TitleView>
         <Grid>
-            <Label Text="Producten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+               Text="Producten" 
+               FontSize="Large" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" />
+
+            <Label Grid.Column="1" 
+               Text="{Binding Source={x:Static vm:GlobalViewModel.Current}, Path=UserDisplayName}" 
+               FontSize="18" 
+               HorizontalOptions="End" 
+               VerticalOptions="Center" 
+               TextColor="Black"
+               Margin="0,0,10,0" />
         </Grid>
     </Shell.TitleView>
 
